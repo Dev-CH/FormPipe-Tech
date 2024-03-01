@@ -7,5 +7,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-curly-brace-presence': 'off',
     'linebreak-style': ['error', 'unix'],
+    "import/extensions": 'off'
   },
 };

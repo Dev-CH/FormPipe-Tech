@@ -13,6 +13,7 @@ import {
   Title,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { Page } from '@/components';
 
 export type User = {
   id: string;
@@ -35,7 +36,7 @@ export function UsersPage() {
   }, []);
 
   return (
-    <>
+    <Page>
       <h1>Users</h1>
 
       <Button my={'md'} onClick={toggle}>
@@ -90,6 +91,6 @@ export function UsersPage() {
           </Card>
         ))}
       </Group>
-    </>
+    </Page>
   );
 }
