@@ -1,39 +1,10 @@
-import { useEffect, useState } from 'react';
-import {
-  Button,
-  Card,
-  Group,
-  Image,
-  Title,
-} from '@mantine/core';
+import { Alert, Button, Card, Center, Group, Image, Loader, Title } from '@mantine/core';
 import { Page, PageFilter } from '@/components';
-import { FilterData } from '@/components/PageFilter';
-
-export type User = {
-  id: string;
-  name: string;
-  avatar: string;
-  gender: 'female' | 'male';
-  hair: 'black' | 'brown' | 'blonde' | 'red' | 'grey';
-  eyes: 'brown' | 'blue' | 'green';
-  glasses: boolean;
-};
+import { FilterData, NetworkStatus } from '@/types';
+import { useUserManager } from '@/context/UserManager';
 
 export function UsersPage() {
-  // TODO - implement a provider and context to raise state and allow table and cards to use same results.
-  const [users, setUsers] = useState<User[]>([]);
-
-  const fetchData = (filters: FilterData = {}) => {
-    const query = new URLSearchParams(filters);
-
-    fetch(`http://localhost:3000/users?${query.toString()}`)
-      .then((response) => response.json())
-      .then((data) => setUsers(data));
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { users, status, filter } = useUserManager();
 
   const handleFilter = (selected: FilterData) => {
     const { glasses, ...filters } = selected;
@@ -42,10 +13,10 @@ export function UsersPage() {
       filters.glasses = (glasses === 'glasses').toString();
     }
 
-    // TODO - implement debounce to prevent wacky renders.
-    fetchData(filters);
+    filter(filters);
   };
 
+  // TODO - tidy render.
   return (
     <Page>
       <h1>Users</h1>
@@ -68,7 +39,7 @@ export function UsersPage() {
           {
             type: 'select',
             label: 'Eye Colour',
-            name: 'hair',
+            name: 'eye',
             placeholder: 'Pick Value',
             data: ['Brown', 'Blue', 'Green', 'Grey'],
           },
@@ -81,29 +52,40 @@ export function UsersPage() {
           },
         ]}
       />
-
-      <Group>
-        {users.map((user, index) => (
-          <Card radius={'md'} withBorder key={index} w={'220'}>
-            <Card.Section>
-              <Image src={`/uploads/${user.avatar}`} alt={`Avatar for ${user.name}`} />
-            </Card.Section>
-            <Title my={'md'} order={4}>
-              {user.name}
-            </Title>
-            <Button
-              size={'xs'}
-              fullWidth
-              variant={'outline'}
-              color={'grape'}
-              component={'a'}
-              href={`/users/view/${user.id}`}
-            >
-              View
-            </Button>
-          </Card>
-        ))}
-      </Group>
+      {(status === NetworkStatus.Fetching) ? (
+        <Center>
+          <Loader />
+        </Center>
+      ) : (
+        (users.length === 0) ? (
+          <Alert title="Alert title">
+            No Results found
+          </Alert>
+        ) : (
+        <Group>
+          {users.map((user, index) => (
+            <Card radius={'md'} withBorder key={index} w={'220'}>
+              <Card.Section>
+                <Image src={`/uploads/${user.avatar}`} alt={`Avatar for ${user.name}`} />
+              </Card.Section>
+              <Title my={'md'} order={4}>
+                {user.name}
+              </Title>
+              <Button
+                size={'xs'}
+                fullWidth
+                variant={'outline'}
+                color={'grape'}
+                component={'a'}
+                href={`/users/view/${user.id}`}
+              >
+                View
+              </Button>
+            </Card>
+          ))}
+        </Group>
+        )
+      )}
     </Page>
   );
 }

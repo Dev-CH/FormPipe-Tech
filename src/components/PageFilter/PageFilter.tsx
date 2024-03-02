@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, Collapse, Paper, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import debounce from 'lodash.debounce';
 import { Filter } from './components/Filter';
-import { FilterConfig, FilterData } from './types/FilterConfig';
+import { FilterConfig, FilterData } from '@/types/FilterConfig';
+import { removeBlank, sanitiseValue } from '@/utils';
 
 interface PageFilterProps {
   config: FilterConfig[],
@@ -13,8 +15,9 @@ const PageFilter: React.FC<PageFilterProps> = ({ config, onFilter }) => {
   const [opened, { toggle }] = useDisclosure(false);
   const [filters, setFilters] = useState<FilterData>();
 
-  const sanitiseValue = (value: string | null): string => (value ?? '').toLowerCase().trim().replace(/ /g, '-');
-  const removeBlank = (object: FilterData) => Object.fromEntries(Object.entries(object).filter(([_, value]) => value !== ''));
+  const handleFilter = useCallback(debounce((filterObject) => {
+    onFilter?.call(this, filterObject);
+  }, 500), []);
 
   const handleChange = (name: string, value: string | null) => {
     const filterObject = removeBlank({
@@ -23,7 +26,7 @@ const PageFilter: React.FC<PageFilterProps> = ({ config, onFilter }) => {
     });
 
     setFilters(filterObject);
-    onFilter?.call(this, filterObject);
+    handleFilter(filterObject);
   };
 
   return (
@@ -36,7 +39,7 @@ const PageFilter: React.FC<PageFilterProps> = ({ config, onFilter }) => {
         <Paper shadow={'sm'} p={'lg'} mb={'md'} withBorder bg={'gray.1'}>
           <Stack gap={10}>
             {config.map((filter) => (
-              <Filter config={filter} onChange={handleChange} />
+              <Filter key={`filter-${filter.name}`} config={filter} onChange={handleChange} />
             ))}
           </Stack>
         </Paper>

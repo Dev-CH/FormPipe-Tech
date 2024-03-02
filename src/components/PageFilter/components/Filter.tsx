@@ -1,6 +1,6 @@
 import React from 'react';
 import { Group, Radio, Select, TextInput } from '@mantine/core';
-import { FilterConfig } from '../types/FilterConfig';
+import { FilterConfig } from '@/types';
 
 interface FilterProps {
   config: FilterConfig,
@@ -30,6 +30,7 @@ export const Filter: React.FC<FilterProps> = ({
         <Group>
           {options.data?.map((option) => (
             <Radio
+              key={`radio-${option}`}
               label={option}
               value={option}
             />
