@@ -7,6 +7,11 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-curly-brace-presence': 'off',
     'linebreak-style': ['error', 'unix'],
-    "import/extensions": 'off'
+    'import/extensions': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', {
+      'argsIgnorePattern': '^_',
+      'varsIgnorePattern': '^_',
+      'caughtErrorsIgnorePattern': '^_'
+    }]
   },
 };

@@ -2,18 +2,12 @@ import { useEffect, useState } from 'react';
 import {
   Button,
   Card,
-  Collapse,
   Group,
   Image,
-  Paper,
-  Radio,
-  Select,
-  Stack,
-  TextInput,
   Title,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { Page } from '@/components';
+import { Page, PageFilter } from '@/components';
+import { FilterData } from '@/components/PageFilter';
 
 export type User = {
   id: string;
@@ -26,48 +20,67 @@ export type User = {
 };
 
 export function UsersPage() {
+  // TODO - implement a provider and context to raise state and allow table and cards to use same results.
   const [users, setUsers] = useState<User[]>([]);
-  const [opened, { toggle }] = useDisclosure(false);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/users')
+  const fetchData = (filters: FilterData = {}) => {
+    const query = new URLSearchParams(filters);
+
+    fetch(`http://localhost:3000/users?${query.toString()}`)
       .then((response) => response.json())
       .then((data) => setUsers(data));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
+
+  const handleFilter = (selected: FilterData) => {
+    const { glasses, ...filters } = selected;
+
+    if (glasses && glasses !== 'all') {
+      filters.glasses = (glasses === 'glasses').toString();
+    }
+
+    // TODO - implement debounce to prevent wacky renders.
+    fetchData(filters);
+  };
 
   return (
     <Page>
       <h1>Users</h1>
-
-      <Button my={'md'} onClick={toggle}>
-        {opened ? 'Hide filters' : 'Show Filters'}
-      </Button>
-
-      <Collapse in={opened}>
-        <Paper shadow="sm" p={'lg'} mb="md" withBorder bg={'gray.1'}>
-          <Stack gap={10}>
-            <TextInput label="Name" placeholder="Enter user's name to filter list" />
-            <Select
-              label="Hair Colour"
-              placeholder="Pick value to filter list"
-              data={['Black', 'Brown', 'Blonde', 'Red', 'Grey']}
-            />
-            <Select
-              label="Eye Colour"
-              placeholder="Pick value"
-              data={['Brown', 'Blue', 'Green', 'Grey']}
-            />
-            <Select label="Gender" placeholder="Pick value" data={['Male', 'Female']} />
-            <Radio.Group label="Glasses?" defaultValue="all">
-              <Group>
-                <Radio label="All" value="all" />
-                <Radio label="Glasses" value="glasses" />
-                <Radio label="No Glasses" value="no-glasses" />
-              </Group>
-            </Radio.Group>
-          </Stack>
-        </Paper>
-      </Collapse>
+      <PageFilter
+        onFilter={handleFilter}
+        config={[
+          {
+            type: 'text',
+            label: 'Name',
+            name: 'name_like',
+            placeholder: "Enter user's name to filter list",
+          },
+          {
+            type: 'select',
+            label: 'Hair Colour',
+            name: 'hair',
+            placeholder: 'Pick value to filter list',
+            data: ['Black', 'Brown', 'Blonde', 'Red', 'Grey'],
+          },
+          {
+            type: 'select',
+            label: 'Eye Colour',
+            name: 'hair',
+            placeholder: 'Pick Value',
+            data: ['Brown', 'Blue', 'Green', 'Grey'],
+          },
+          {
+            type: 'radio',
+            label: 'Glasses?',
+            name: 'glasses',
+            defaultValue: 'All',
+            data: ['All', 'Glasses', 'No Glasses'],
+          },
+        ]}
+      />
 
       <Group>
         {users.map((user, index) => (
