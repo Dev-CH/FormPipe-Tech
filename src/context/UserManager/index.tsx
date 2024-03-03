@@ -6,12 +6,16 @@ interface UserManagerContext {
   users: User[];
   status: NetworkStatus;
   filter: (filterBy: FilterData) => void;
+  hasUsers: boolean,
+  isFiltered: boolean,
 }
 
 const defaultContext = {
   users: [],
   status: NetworkStatus.Idle,
   filter: () => null,
+  hasUsers: false,
+  isFiltered: false,
 };
 
 const UserManager = React.createContext<UserManagerContext>(defaultContext);
@@ -28,7 +32,7 @@ const useUserManager = (): UserManagerContext => {
 const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [status, setStatus] = useState<NetworkStatus>(NetworkStatus.Idle);
-  const [filters, setFilters] = useState<FilterData>();
+  const [filters, setFilters] = useState<FilterData>({});
 
   const fetchUsers = () => {
     if (status === NetworkStatus.Fetching) {
@@ -65,6 +69,8 @@ const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
         users,
         status,
         filter,
+        hasUsers: users.length > 0,
+        isFiltered: Object.values(filters).length > 0,
       }}
     >
       {children}
