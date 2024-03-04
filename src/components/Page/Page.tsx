@@ -8,7 +8,9 @@ const Page: React.FC<PropsWithChildren> = ({ children }) => (
       <AppShell.Header style={{ minWidth: 600 }}>
         <Menu />
       </AppShell.Header>
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main style={{ display: 'flex' }}>
+        {children}
+      </AppShell.Main>
     </AppShell>
   </Container>
 );
