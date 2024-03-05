@@ -1,3 +1,15 @@
+#### Notes:
+
+TODO:
+- Gracefully handle API errors.
+- Use a package like `react-query` to help manage request caching.
+- Refactor `UserManagerProvider` as project progressed, this context became bloated.
+- Introduce yup validation schema for form validation.
+- Add unit tests for components.
+- Create documentation using storybook.
+
+--------
+
 # Formpipe React Development Test
 
 This project is designed to allow you to showcase your React skills by building a simple application that consumes a mock back end API.

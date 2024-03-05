@@ -9,6 +9,8 @@ export interface User {
   roles: number[];
 }
 
+export type UpdateUserRequest = Omit<User, 'id' | 'avatar' | 'roles'>;
+
 export interface UserPaginate {
   _limit: number;
   _page: number;

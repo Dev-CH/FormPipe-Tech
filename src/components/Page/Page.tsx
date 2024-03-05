@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { AppShell, Container } from '@mantine/core';
+import { AppShell, Container, Flex } from '@mantine/core';
 import { Menu } from '@/components';
 
 const Page: React.FC<PropsWithChildren> = ({ children }) => (
@@ -8,8 +8,10 @@ const Page: React.FC<PropsWithChildren> = ({ children }) => (
       <AppShell.Header style={{ minWidth: 600 }}>
         <Menu />
       </AppShell.Header>
-      <AppShell.Main style={{ display: 'flex' }}>
-        {children}
+      <AppShell.Main>
+        <Flex justify={'center'} direction={'column'}>
+          {children}
+        </Flex>
       </AppShell.Main>
     </AppShell>
   </Container>

@@ -1,6 +1,6 @@
 import Client from '../Client/client';
 import { ApiResponse } from '@/api/types/ApiResponse';
-import { User } from '@/api/types';
+import { UpdateUserRequest, User } from '@/api/types';
 
 interface UserFilters {
     [name: string]: any,
@@ -38,6 +38,21 @@ class UserController {
                resolve({
                    total: 1,
                    data: response.data[0],
+               });
+           });
+        });
+    }
+
+    update(id: string, data: UpdateUserRequest): Promise<ApiResponse<User>> {
+        return new Promise((resolve) => {
+           this.#client.request<User>({
+               method: 'PATCH',
+               url: `/users/${id}`,
+               data: { ...data },
+           }).then((response) => {
+               resolve({
+                   total: 1,
+                   data: response.data,
                });
            });
         });
