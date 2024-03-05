@@ -81,7 +81,13 @@ export const UserEdit: React.FC<UserEditProps> = ({ user }) => {
               />
             </Grid.Col>
           </Grid>
-            <Button onClick={() => onSubmit(handleSubmit)} type={'submit'}>Submit</Button>
+            <Button
+              color={'grape'}
+              onClick={() => onSubmit(handleSubmit)}
+              type={'submit'}
+            >
+                Submit
+            </Button>
         </form>
     </Card>
   );

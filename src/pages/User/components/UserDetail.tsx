@@ -37,7 +37,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({
         <Flex direction={'column'} p={'md'} gap={'md'}>
           <Group justify={'flex-start'} gap={'xs'} mt={'md'}>
             {roles.map((role) => (
-              <Badge color={'pink'}>Role: {role}</Badge>
+              <Badge color={'grape'}>Role: {role}</Badge>
             ))}
           </Group>
           {display.map(({ title, value }) => (

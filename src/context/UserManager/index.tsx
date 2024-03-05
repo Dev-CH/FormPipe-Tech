@@ -57,7 +57,7 @@ const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const api = useApi();
   const [status, setStatus] = useState<NetworkStatus>(NetworkStatus.Idle);
   const [filters, setFilters] = useState<FilterData>({});
-  const [pagination, setPagination] = useState<UserPaginate>({ _page: 1, _limit: 12 });
+  const [pagination, setPagination] = useState<UserPaginate>({ _page: 1, _limit: 8 });
   const [ordering, setOrdering] = useState<UserOrdering>({ _sort: 'name', _order: 'asc' });
   const [{ users, total }, setResponseData] = useState<ResponseData>({ users: [], total: 0 });
   const [viewedUser, setViewedUser] = useState<User>();

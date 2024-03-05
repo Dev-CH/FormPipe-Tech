@@ -14,8 +14,4 @@ export const routeConfig: RouteConfig[] = [
     path: '/users/view/:id',
     component: <UserDetailPage />,
   },
-  {
-    path: '/users/edit/:id',
-    component: <p>Not yet implemented</p>,
-  },
 ];

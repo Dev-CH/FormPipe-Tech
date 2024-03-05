@@ -24,7 +24,7 @@ export const UserDetailPage = () => {
     <Page>
       <LoadingOverlay visible={!user || user.id !== id} zIndex={1000} />
       <Flex>
-        <Button onClick={() => navigate(-1)} variant={'transparent'}>
+        <Button color={'grape'} onClick={() => navigate(-1)} variant={'transparent'}>
           <Group>
             <IconArrowLeft /> Back
           </Group>

@@ -57,7 +57,7 @@ export const UsersPage: React.FC = () => {
 
         <div style={{ flex: 1 }}>{renderContent()}</div>
 
-        <PagePagination total={total} onPaginate={paginate} limit={12} />
+        <PagePagination total={total} onPaginate={paginate} limit={8} />
       </Flex>
     </Page>
   );

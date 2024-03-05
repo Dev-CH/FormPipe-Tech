@@ -26,6 +26,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
     <Flex justify={'space-between'} mb={'sm'}>
       <Group gap={'xs'}>
         <ActionIcon
+          color={'grape'}
           size={'xl'}
           radius={'md'}
           variant={(currentView === Action.ViewList) ? 'filled' : 'light'}
@@ -35,6 +36,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
           <IconListDetails />
         </ActionIcon>
         <ActionIcon
+          color={'grape'}
           size={'xl'}
           radius={'md'}
           variant={(currentView === Action.ViewTable) ? 'filled' : 'light'}
@@ -45,12 +47,14 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
         </ActionIcon>
       </Group>
       <Indicator
+        color={'grape'}
         offset={3}
         disabled={!isFiltered}
         size={15}
         withBorder
       >
         <ActionIcon
+          color={'grape'}
           size={'xl'}
           radius={'md'}
           variant={'light'}

@@ -30,6 +30,7 @@ export const Filter: React.FC<FilterProps> = ({
         <Group>
           {options.data?.map((option) => (
             <Radio
+              color={'grape'}
               key={`radio-${option}`}
               label={option}
               value={option}

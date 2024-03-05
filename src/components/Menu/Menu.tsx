@@ -15,7 +15,6 @@ const Menu = () => (
     <Group ml="xl" gap={5}>
       <MenuButton href="/">Home</MenuButton>
       <MenuButton href="/users">List Users</MenuButton>
-      <MenuButton href="/users/create">Create User</MenuButton>
     </Group>
   </Group>
 );

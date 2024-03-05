@@ -16,7 +16,7 @@ const PageFilter: React.FC<PageFilterProps> = ({ config, onFilter, opened = fals
 
   const handleFilter = useCallback(debounce((filterObject) => {
     onFilter?.call(this, filterObject);
-  }, 500), []);
+  }, 300), []);
 
   const handleChange = (name: string, value: string | null) => {
     const filterObject = removeBlank({
