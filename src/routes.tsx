@@ -1,5 +1,5 @@
 import { RouteConfig } from '@/types';
-import { HomePage, UsersPage } from '@/pages';
+import { HomePage, UsersPage, UserDetailPage } from '@/pages';
 
 export const routeConfig: RouteConfig[] = [
   {
@@ -12,7 +12,7 @@ export const routeConfig: RouteConfig[] = [
   },
   {
     path: '/users/view/:id',
-    component: <p>Not yet implemented</p>,
+    component: <UserDetailPage />,
   },
   {
     path: '/users/edit/:id',

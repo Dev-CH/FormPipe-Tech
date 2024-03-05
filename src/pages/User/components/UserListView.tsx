@@ -13,7 +13,7 @@ export const UserListView: React.FC = () => {
           key={`user-list-${user.id}`}
           span={{ base: 6, xs: 4, sm: 3, md: 2 }}
         >
-          <UserCard user={user} />
+          <UserCard user={user} withLink />
         </Grid.Col>
       ))}
     </Grid>

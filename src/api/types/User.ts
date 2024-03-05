@@ -6,6 +6,7 @@ export interface User {
   hair: 'black' | 'brown' | 'blonde' | 'red' | 'grey';
   eyes: 'brown' | 'blue' | 'green';
   glasses: boolean;
+  roles: number[];
 }
 
 export interface UserPaginate {

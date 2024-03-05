@@ -1,7 +1,8 @@
 import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { FilterData, NetworkStatus, User } from '@/types';
-import { Direction, Sortable, UserOrdering, UserPaginate } from '@/types/User';
+import { FilterData, NetworkStatus } from '@/types';
+import { Direction, Sortable, UserOrdering, UserPaginate } from '@/api/types/User';
+import { useApi } from '@/context/ApiClient';
+import { User } from '@/api/types';
 
 interface UserManagerContext {
   users: User[];
@@ -12,6 +13,11 @@ interface UserManagerContext {
   sort: (column: Sortable, direction: Direction) => void;
   hasUsers: boolean;
   isFiltered: boolean;
+}
+
+interface ResponseData {
+  users: User[];
+  total: number;
 }
 
 const defaultContext = {
@@ -37,11 +43,12 @@ const useUserManager = (): UserManagerContext => {
 };
 
 const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const api = useApi();
   const [status, setStatus] = useState<NetworkStatus>(NetworkStatus.Idle);
   const [filters, setFilters] = useState<FilterData>({});
   const [pagination, setPagination] = useState<UserPaginate>({ _page: 1, _limit: 12 });
   const [ordering, setOrdering] = useState<UserOrdering>({ _sort: 'name', _order: 'asc' });
-  const [{ users, total }, setResponseData] = useState<any>({ users: [], total: 0 });
+  const [{ users, total }, setResponseData] = useState<ResponseData>({ users: [], total: 0 });
 
   const fetchUsers = () => {
     if (status === NetworkStatus.Fetching) {
@@ -49,27 +56,16 @@ const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
     setStatus(NetworkStatus.Fetching);
-    axios<User[]>({
-      method: 'GET',
-      url: 'http://localhost:3000/users',
-      params: {
-        ...filters,
-        ...pagination,
-        ...ordering,
-      },
-    })
-      .then((response) => {
-        const totalCount = parseInt(response.headers['x-total-count'], 10);
-
-        setResponseData({
-          total: totalCount,
-          users: response.data,
-        });
-        setStatus(NetworkStatus.Done);
-      })
-      .catch(() => {
-        setStatus(NetworkStatus.Error);
+    api.user.getAll({
+      ...ordering,
+      ...pagination,
+      ...filters,
+    }).then((response) => {
+      setResponseData({
+        users: response.data,
+        total: response.total,
       });
+    }).finally(() => setStatus(NetworkStatus.Done));
   };
 
   const filter = (filterBy: FilterData) => {
