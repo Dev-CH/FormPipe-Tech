@@ -1,32 +1,35 @@
-import React, { useCallback, useState } from 'react';
-import { Collapse, Paper, Stack } from '@mantine/core';
-import debounce from 'lodash.debounce';
-import { FilterConfig, FilterData } from '@types';
-import { removeBlank, sanitiseValue } from '@utils';
-import { Filter } from './components/Filter';
+import React, { useCallback, useState } from 'react'
+import { Collapse, Paper, Stack } from '@mantine/core'
+import debounce from 'lodash.debounce'
+import { FilterConfig, FilterData } from '@types'
+import { removeBlank, sanitiseValue } from '@utils'
+import { Filter } from './components/Filter'
 
 interface PageFilterProps {
-  config: FilterConfig[],
-  onFilter?: (filters: FilterData) => void;
-  opened: boolean,
+  config: FilterConfig[]
+  onFilter?: (filters: FilterData) => void
+  opened: boolean
 }
 
 const PageFilter: React.FC<PageFilterProps> = ({ config, onFilter, opened = false }) => {
-  const [filters, setFilters] = useState<FilterData>();
+  const [filters, setFilters] = useState<FilterData>()
 
-  const handleFilter = useCallback(debounce((filterObject) => {
-    onFilter?.call(this, filterObject);
-  }, 300), []);
+  const handleFilter = useCallback(
+    debounce((filterObject) => {
+      onFilter?.call(this, filterObject)
+    }, 300),
+    []
+  )
 
   const handleChange = (name: string, value: string | null) => {
     const filterObject = removeBlank({
       ...filters,
       [name]: sanitiseValue(value),
-    });
+    })
 
-    setFilters(filterObject);
-    handleFilter(filterObject);
-  };
+    setFilters(filterObject)
+    handleFilter(filterObject)
+  }
 
   return (
     <Collapse in={opened}>
@@ -38,7 +41,7 @@ const PageFilter: React.FC<PageFilterProps> = ({ config, onFilter, opened = fals
         </Stack>
       </Paper>
     </Collapse>
-  );
-};
+  )
+}
 
-export default PageFilter;
+export default PageFilter

@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react';
-import { AppShell, Container, Flex } from '@mantine/core';
-import { Menu } from '@components';
+import React, { PropsWithChildren } from 'react'
+import { AppShell, Container, Flex } from '@mantine/core'
+import { Menu } from '@components'
 
 const Page: React.FC<PropsWithChildren> = ({ children }) => (
   <Container size={'xl'} style={{ border: '1px solid #ccc' }}>
@@ -15,6 +15,6 @@ const Page: React.FC<PropsWithChildren> = ({ children }) => (
       </AppShell.Main>
     </AppShell>
   </Container>
-);
+)
 
-export default Page;
+export default Page

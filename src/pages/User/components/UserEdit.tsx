@@ -1,18 +1,28 @@
-import { Button, Card, Checkbox, Grid, Group, TextInput, Text, Select, LoadingOverlay } from '@mantine/core';
-import { isNotEmpty, useForm } from '@mantine/form';
-import React, { useEffect, useState } from 'react';
-import { UpdateUserRequest, User } from '@api/types';
-import { useUserManager } from '@context/UserManager';
+import {
+  Button,
+  Card,
+  Checkbox,
+  Grid,
+  Group,
+  TextInput,
+  Text,
+  Select,
+  LoadingOverlay,
+} from '@mantine/core'
+import { isNotEmpty, useForm } from '@mantine/form'
+import React, { useEffect, useState } from 'react'
+import { UpdateUserRequest, User } from '@api/types'
+import { useUserManager } from '@context/UserManager'
 
 interface UserEditProps {
-  user: User,
+  user: User
 }
 
-type FormData = UpdateUserRequest;
+type FormData = UpdateUserRequest
 
 export const UserEdit: React.FC<UserEditProps> = ({ user }) => {
-  const { updateUser } = useUserManager();
-  const [submitting, setSubmitting] = useState(false);
+  const { updateUser } = useUserManager()
+  const [submitting, setSubmitting] = useState(false)
   const { getInputProps, onSubmit } = useForm<FormData>({
     initialValues: { ...user },
     validate: {
@@ -21,18 +31,16 @@ export const UserEdit: React.FC<UserEditProps> = ({ user }) => {
       gender: isNotEmpty('Gender is required.'),
       eyes: isNotEmpty('Eye colour is required.'),
     },
-  });
+  })
 
-  useEffect(() => {
-
-  }, [user.id]);
+  useEffect(() => {}, [user.id])
 
   const handleSubmit = (values: FormData) => {
-    setSubmitting(true);
+    setSubmitting(true)
     updateUser(user.id, values as UpdateUserRequest).finally(() => {
-      setSubmitting(false);
-    });
-  };
+      setSubmitting(false)
+    })
+  }
 
   return (
     <Card shadow="sm" padding="sm" radius="md" w={500} withBorder>
@@ -40,55 +48,47 @@ export const UserEdit: React.FC<UserEditProps> = ({ user }) => {
       <Group>
         <Text c={'dimmed'}>Edit:</Text>
       </Group>
-        <form onSubmit={onSubmit(handleSubmit)}>
-          <Grid mb={'md'}>
-            <Grid.Col span={6}>
-              <TextInput
-                variant={'filled'}
-                label={'Name'}
-                {...getInputProps('name')}
-              />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Select
-                variant={'filled'}
-                label={'Gender'}
-                data={['female', 'male']}
-                {...getInputProps('gender')}
-              />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Select
-                variant={'filled'}
-                label={'Hair'}
-                data={['black', 'brown', 'blonde', 'red', 'grey']}
-                {...getInputProps('hair')}
-              />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Select
-                variant={'filled'}
-                label={'Eyes'}
-                data={['brown', 'blue', 'green']}
-                {...getInputProps('eyes')}
-              />
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Checkbox
-                variant={'filled'}
-                label={'Glasses'}
-                {...getInputProps('glasses', { type: 'checkbox' })}
-              />
-            </Grid.Col>
-          </Grid>
-            <Button
-              color={'grape'}
-              onClick={() => onSubmit(handleSubmit)}
-              type={'submit'}
-            >
-                Submit
-            </Button>
-        </form>
+      <form onSubmit={onSubmit(handleSubmit)}>
+        <Grid mb={'md'}>
+          <Grid.Col span={6}>
+            <TextInput variant={'filled'} label={'Name'} {...getInputProps('name')} />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Select
+              variant={'filled'}
+              label={'Gender'}
+              data={['female', 'male']}
+              {...getInputProps('gender')}
+            />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Select
+              variant={'filled'}
+              label={'Hair'}
+              data={['black', 'brown', 'blonde', 'red', 'grey']}
+              {...getInputProps('hair')}
+            />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Select
+              variant={'filled'}
+              label={'Eyes'}
+              data={['brown', 'blue', 'green']}
+              {...getInputProps('eyes')}
+            />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Checkbox
+              variant={'filled'}
+              label={'Glasses'}
+              {...getInputProps('glasses', { type: 'checkbox' })}
+            />
+          </Grid.Col>
+        </Grid>
+        <Button color={'grape'} onClick={() => onSubmit(handleSubmit)} type={'submit'}>
+          Submit
+        </Button>
+      </form>
     </Card>
-  );
-};
+  )
+}

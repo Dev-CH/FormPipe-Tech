@@ -1,32 +1,25 @@
-import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { FilterData, NetworkStatus } from '@types';
-import {
-  Direction,
-  Sortable,
-  UpdateUserRequest,
-  UserOrdering,
-  UserPaginate,
-  User,
-} from '@api';
-import { useApi } from '@context/ApiClient';
+import React, { PropsWithChildren, useContext, useEffect, useState } from 'react'
+import { FilterData, NetworkStatus } from '@types'
+import { Direction, Sortable, UpdateUserRequest, UserOrdering, UserPaginate, User } from '@api'
+import { useApi } from '@context/ApiClient'
 
 interface UserManagerContext {
-  users: User[];
-  viewedUser?: User;
-  total: number;
-  status: NetworkStatus;
-  filter: (filterBy: FilterData) => void;
-  paginate: (page: number) => void;
-  sort: (column: Sortable, direction: Direction) => void;
-  hasUsers: boolean;
-  isFiltered: boolean;
-  getUser: (id: string) => void;
-  updateUser: (id: string, request: UpdateUserRequest) => Promise<boolean>;
+  users: User[]
+  viewedUser?: User
+  total: number
+  status: NetworkStatus
+  filter: (filterBy: FilterData) => void
+  paginate: (page: number) => void
+  sort: (column: Sortable, direction: Direction) => void
+  hasUsers: boolean
+  isFiltered: boolean
+  getUser: (id: string) => void
+  updateUser: (id: string, request: UpdateUserRequest) => Promise<boolean>
 }
 
 interface ResponseData {
-  users: User[];
-  total: number;
+  users: User[]
+  total: number
 }
 
 const defaultContext = {
@@ -40,89 +33,95 @@ const defaultContext = {
   isFiltered: false,
   getUser: () => null,
   updateUser: () => new Promise<boolean>(() => {}),
-};
+}
 
-const UserManager = React.createContext<UserManagerContext>(defaultContext);
+const UserManager = React.createContext<UserManagerContext>(defaultContext)
 
 const useUserManager = (): UserManagerContext => {
-  const context = useContext(UserManager);
+  const context = useContext(UserManager)
   if (!context) {
-    throw Error('Unable to find user manager.');
+    throw Error('Unable to find user manager.')
   }
 
-  return context;
-};
+  return context
+}
 
 const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const api = useApi();
-  const [status, setStatus] = useState<NetworkStatus>(NetworkStatus.Idle);
-  const [filters, setFilters] = useState<FilterData>({});
-  const [pagination, setPagination] = useState<UserPaginate>({ _page: 1, _limit: 8 });
-  const [ordering, setOrdering] = useState<UserOrdering>({ _sort: 'name', _order: 'asc' });
-  const [{ users, total }, setResponseData] = useState<ResponseData>({ users: [], total: 0 });
-  const [viewedUser, setViewedUser] = useState<User>();
+  const api = useApi()
+  const [status, setStatus] = useState<NetworkStatus>(NetworkStatus.Idle)
+  const [filters, setFilters] = useState<FilterData>({})
+  const [pagination, setPagination] = useState<UserPaginate>({ _page: 1, _limit: 8 })
+  const [ordering, setOrdering] = useState<UserOrdering>({ _sort: 'name', _order: 'asc' })
+  const [{ users, total }, setResponseData] = useState<ResponseData>({ users: [], total: 0 })
+  const [viewedUser, setViewedUser] = useState<User>()
 
   const fetchUsers = () => {
     if (status === NetworkStatus.Fetching) {
-      return;
+      return
     }
 
-    setStatus(NetworkStatus.Fetching);
-    api.user.getAll({
-      ...ordering,
-      ...pagination,
-      ...filters,
-    }).then((response) => {
-      setResponseData({
-        users: response.data,
-        total: response.total,
-      });
-    }).finally(() => setStatus(NetworkStatus.Done));
-  };
+    setStatus(NetworkStatus.Fetching)
+    api.user
+      .getAll({
+        ...ordering,
+        ...pagination,
+        ...filters,
+      })
+      .then((response) => {
+        setResponseData({
+          users: response.data,
+          total: response.total,
+        })
+      })
+      .finally(() => setStatus(NetworkStatus.Done))
+  }
 
   const getUser = (id: string) => {
-    setStatus(NetworkStatus.Fetching);
+    setStatus(NetworkStatus.Fetching)
 
-    api.user.get(id).then((response) => {
-      setViewedUser(response.data);
-    }).finally(() => setStatus(NetworkStatus.Done));
-  };
+    api.user
+      .get(id)
+      .then((response) => {
+        setViewedUser(response.data)
+      })
+      .finally(() => setStatus(NetworkStatus.Done))
+  }
 
   const updateUser = (id: string, request: UpdateUserRequest): Promise<boolean> =>
     new Promise((resolve) => {
       api.user.update(id, request).then((response) => {
-        setViewedUser(response.data);
-        fetchUsers();
-        resolve(true);
-      });
-    });
+        setViewedUser(response.data)
+        fetchUsers()
+        resolve(true)
+      })
+    })
 
   const filter = (filterBy: FilterData) => {
-    setFilters(filterBy);
-    setStatus(NetworkStatus.Dirty);
-  };
+    setFilters(filterBy)
+    setStatus(NetworkStatus.Dirty)
+  }
 
   const paginate = (page: number) => {
     setPagination({
       ...pagination,
       _page: page,
-    });
-    setStatus(NetworkStatus.Dirty);
-  };
+    })
+    setStatus(NetworkStatus.Dirty)
+  }
 
   const sort = (column: Sortable, direction: Direction) => {
     setOrdering({
       _sort: column,
       _order: direction,
-    });
-    setStatus(NetworkStatus.Dirty);
-  };
+    })
+    setStatus(NetworkStatus.Dirty)
+  }
 
   useEffect(() => {
     if (status === NetworkStatus.Dirty || status === NetworkStatus.Idle) {
-      fetchUsers();
+      fetchUsers()
     }
-  }, [status]);
+  }, [status])
 
   return (
     <UserManager.Provider
@@ -142,7 +141,7 @@ const UserManagerProvider: React.FC<PropsWithChildren> = ({ children }) => {
     >
       {children}
     </UserManager.Provider>
-  );
-};
+  )
+}
 
-export { UserManagerProvider, useUserManager };
+export { UserManagerProvider, useUserManager }

@@ -1,24 +1,19 @@
-import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import {
-  Group,
-  LoadingOverlay,
-  Button,
-  Flex,
-} from '@mantine/core';
-import { IconArrowLeft } from '@tabler/icons-react';
-import { Page } from '@components';
-import { useUserManager } from '@context/UserManager';
-import { UserDetail, UserEdit } from './components';
+import React, { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Group, LoadingOverlay, Button, Flex } from '@mantine/core'
+import { IconArrowLeft } from '@tabler/icons-react'
+import { Page } from '@components'
+import { useUserManager } from '@context/UserManager'
+import { UserDetail, UserEdit } from './components'
 
 export const UserDetailPage = () => {
-  const { id } = useParams();
-  const { viewedUser: user, getUser } = useUserManager();
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const { viewedUser: user, getUser } = useUserManager()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    getUser(id as string);
-  }, [id]);
+    getUser(id as string)
+  }, [id])
 
   return (
     <Page>
@@ -30,12 +25,12 @@ export const UserDetailPage = () => {
           </Group>
         </Button>
       </Flex>
-      {(user && user.id === id) && (
+      {user && user.id === id && (
         <Flex direction={'column'} gap={'xl'} align={'center'} justify={'center'}>
           <UserDetail {...user} />
           <UserEdit user={user} />
         </Flex>
       )}
     </Page>
-  );
-};
+  )
+}

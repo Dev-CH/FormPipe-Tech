@@ -1,17 +1,17 @@
-import Client from './Client/client';
-import UserController from './User';
+import Client from './Client/client'
+import UserController from './User'
 
 class Api {
-  readonly #client: Client;
+  readonly #client: Client
 
-  user: UserController;
+  user: UserController
 
   constructor() {
-    this.#client = new Client();
+    this.#client = new Client()
 
-    this.user = new UserController(this.#client);
+    this.user = new UserController(this.#client)
   }
 }
 
-export default Api;
-export * from './types';
+export default Api
+export * from './types'

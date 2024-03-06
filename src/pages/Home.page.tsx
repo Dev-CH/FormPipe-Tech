@@ -1,5 +1,5 @@
-import { Image, Title } from '@mantine/core';
-import { Page } from '@components';
+import { Image, Title } from '@mantine/core'
+import { Page } from '@components'
 
 export function HomePage() {
   return (
@@ -8,5 +8,5 @@ export function HomePage() {
       <p>View the README to learn more</p>
       <Image w={200} src="uploads/caitlin.png" alt="Alice" radius={'md'} />
     </Page>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { ActionIcon, Flex, Group, Indicator } from '@mantine/core';
-import { IconFilter, IconListDetails, IconTableRow } from '@tabler/icons-react';
-import { useUserManager } from '@context/UserManager';
+import React, { useState } from 'react'
+import { ActionIcon, Flex, Group, Indicator } from '@mantine/core'
+import { IconFilter, IconListDetails, IconTableRow } from '@tabler/icons-react'
+import { useUserManager } from '@context/UserManager'
 
 interface ActionBarProps {
-  onAction: (action: Action) => void;
+  onAction: (action: Action) => void
 }
 
 export enum Action {
@@ -14,13 +14,13 @@ export enum Action {
 }
 
 export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
-  const [currentView, setCurrentView] = useState<Action>(Action.ViewList);
-  const { isFiltered } = useUserManager();
+  const [currentView, setCurrentView] = useState<Action>(Action.ViewList)
+  const { isFiltered } = useUserManager()
 
   const handleViewChange = (action: Action) => {
-    setCurrentView(action);
-    onAction(action);
-  };
+    setCurrentView(action)
+    onAction(action)
+  }
 
   return (
     <Flex justify={'space-between'} mb={'sm'}>
@@ -29,7 +29,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
           color={'grape'}
           size={'xl'}
           radius={'md'}
-          variant={(currentView === Action.ViewList) ? 'filled' : 'light'}
+          variant={currentView === Action.ViewList ? 'filled' : 'light'}
           aria-label={'List View'}
           onClick={() => handleViewChange(Action.ViewList)}
         >
@@ -39,20 +39,14 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
           color={'grape'}
           size={'xl'}
           radius={'md'}
-          variant={(currentView === Action.ViewTable) ? 'filled' : 'light'}
+          variant={currentView === Action.ViewTable ? 'filled' : 'light'}
           aria-label={'Table View'}
           onClick={() => handleViewChange(Action.ViewTable)}
         >
           <IconTableRow />
         </ActionIcon>
       </Group>
-      <Indicator
-        color={'grape'}
-        offset={3}
-        disabled={!isFiltered}
-        size={15}
-        withBorder
-      >
+      <Indicator color={'grape'} offset={3} disabled={!isFiltered} size={15} withBorder>
         <ActionIcon
           color={'grape'}
           size={'xl'}
@@ -61,9 +55,9 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onAction }) => {
           aria-label={'Toggle Filters'}
           onClick={() => onAction(Action.ViewFilter)}
         >
-            <IconFilter />
+          <IconFilter />
         </ActionIcon>
       </Indicator>
     </Flex>
-  );
-};
+  )
+}

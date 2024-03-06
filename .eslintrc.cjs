@@ -1,5 +1,6 @@
 module.exports = {
-  extends: ['mantine'],
+  extends: ['mantine', 'eslint-config-mantine', 'plugin:prettier/recommended'],
+  plugins: ['prettier'],
   parserOptions: {
     project: './tsconfig.json',
   },

@@ -1,16 +1,16 @@
-import React from 'react';
-import { Center, Pagination } from '@mantine/core';
+import React from 'react'
+import { Center, Pagination } from '@mantine/core'
 
 interface PagePaginationProps {
-  total: number;
-  limit: number;
-  onPaginate: (page: number) => void;
+  total: number
+  limit: number
+  onPaginate: (page: number) => void
 }
 
 const PagePagination: React.FC<PagePaginationProps> = ({ total, limit, onPaginate }) => {
   const handleChange = (page: number) => {
-    onPaginate?.call(this, page);
-  };
+    onPaginate?.call(this, page)
+  }
 
   return (
     <Center>
@@ -21,7 +21,7 @@ const PagePagination: React.FC<PagePaginationProps> = ({ total, limit, onPaginat
         mt={'sm'}
       />
     </Center>
-  );
-};
+  )
+}
 
-export default PagePagination;
+export default PagePagination

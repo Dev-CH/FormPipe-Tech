@@ -1,7 +1,7 @@
-import { FilterData } from '@types';
+import { FilterData } from '@types'
 
 export const removeBlank = (object: FilterData): FilterData =>
-  Object.fromEntries(Object.entries(object).filter(([_, value]) => value !== ''));
+  Object.fromEntries(Object.entries(object).filter(([_, value]) => value !== ''))
 
 export const sanitiseValue = (value: string | null): string =>
-  (value ?? '').toLowerCase().trim().replace(/ /g, '-');
+  (value ?? '').toLowerCase().trim().replace(/ /g, '-')

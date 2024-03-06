@@ -1,31 +1,31 @@
-import React, { PropsWithChildren, useContext, useRef } from 'react';
-import Api from '@api';
+import React, { PropsWithChildren, useContext, useRef } from 'react'
+import Api from '@api'
 
 interface ApiClientContext {
-  client?: Api;
+  client?: Api
 }
 
 const defaultContext = {
   client: undefined,
-};
+}
 
-const ApiClient = React.createContext<ApiClientContext>(defaultContext);
+const ApiClient = React.createContext<ApiClientContext>(defaultContext)
 
 const useApi = (): Api => {
-  const context = useContext(ApiClient);
+  const context = useContext(ApiClient)
 
   if (!context.client) {
-    throw Error('No SDK');
+    throw Error('No SDK')
   }
 
-  return context.client;
-};
+  return context.client
+}
 
 const ApiClientProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const clientRef = useRef<Api>();
+  const clientRef = useRef<Api>()
 
   if (!clientRef.current) {
-    clientRef.current = new Api();
+    clientRef.current = new Api()
   }
 
   return (
@@ -36,7 +36,7 @@ const ApiClientProvider: React.FC<PropsWithChildren> = ({ children }) => {
     >
       {children}
     </ApiClient.Provider>
-  );
-};
+  )
+}
 
-export { ApiClientProvider, useApi };
+export { ApiClientProvider, useApi }

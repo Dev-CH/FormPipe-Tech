@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
+import { ReactElement } from 'react'
 
 export interface RouteConfig {
-  path: string;
-  component: ReactElement;
+  path: string
+  component: ReactElement
 }

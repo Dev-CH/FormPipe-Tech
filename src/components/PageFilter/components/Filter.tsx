@@ -1,23 +1,15 @@
-import React from 'react';
-import { Group, Radio, Select, TextInput } from '@mantine/core';
-import { FilterConfig } from '@types';
+import React from 'react'
+import { Group, Radio, Select, TextInput } from '@mantine/core'
+import { FilterConfig } from '@types'
 
 interface FilterProps {
-  config: FilterConfig,
-  onChange: (name: string, value: string | null) => void;
+  config: FilterConfig
+  onChange: (name: string, value: string | null) => void
 }
 
-export const Filter: React.FC<FilterProps> = ({
-  config: { type, ...options },
-  onChange,
-}) => {
+export const Filter: React.FC<FilterProps> = ({ config: { type, ...options }, onChange }) => {
   if (type === 'select') {
-    return (
-      <Select
-        onChange={(value) => onChange(options.name, value)}
-        {...options}
-      />
-    );
+    return <Select onChange={(value) => onChange(options.name, value)} {...options} />
   }
 
   if (type === 'radio') {
@@ -29,16 +21,11 @@ export const Filter: React.FC<FilterProps> = ({
       >
         <Group>
           {options.data?.map((option) => (
-            <Radio
-              color={'grape'}
-              key={`radio-${option}`}
-              label={option}
-              value={option}
-            />
+            <Radio color={'grape'} key={`radio-${option}`} label={option} value={option} />
           ))}
         </Group>
       </Radio.Group>
-    );
+    )
   }
 
   return (
@@ -46,5 +33,5 @@ export const Filter: React.FC<FilterProps> = ({
       onChange={(value) => onChange(options.name, value.currentTarget.value)}
       {...options}
     />
-  );
-};
+  )
+}

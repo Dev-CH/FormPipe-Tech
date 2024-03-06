@@ -1,9 +1,9 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { RouteConfig } from '@types';
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { RouteConfig } from '@types'
 
 interface RouterProps {
-  config: RouteConfig[];
+  config: RouteConfig[]
 }
 
 const Router: React.FC<RouterProps> = ({ config }) => (
@@ -14,6 +14,6 @@ const Router: React.FC<RouterProps> = ({ config }) => (
       ))}
     </Routes>
   </BrowserRouter>
-);
+)
 
-export default Router;
+export default Router

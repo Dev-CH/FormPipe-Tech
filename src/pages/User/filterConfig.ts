@@ -1,4 +1,4 @@
-import { FilterConfig } from '@types';
+import { FilterConfig } from '@types'
 
 export const filterConfig: FilterConfig[] = [
   {
@@ -28,4 +28,4 @@ export const filterConfig: FilterConfig[] = [
     defaultValue: 'All',
     data: ['All', 'Glasses', 'No Glasses'],
   },
-];
+]

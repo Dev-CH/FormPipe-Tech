@@ -1,14 +1,14 @@
-import { Badge, Card, Flex, Group, Image, Text } from '@mantine/core';
-import React from 'react';
+import { Badge, Card, Flex, Group, Image, Text } from '@mantine/core'
+import React from 'react'
 
 interface UserDetailProps {
-  avatar: string,
-  roles: any[],
-  name: string,
-  eyes: string,
-  gender: string,
-  hair: string,
-  glasses: boolean,
+  avatar: string
+  roles: any[]
+  name: string
+  eyes: string
+  gender: string
+  hair: string
+  glasses: boolean
 }
 
 export const UserDetail: React.FC<UserDetailProps> = ({
@@ -26,7 +26,7 @@ export const UserDetail: React.FC<UserDetailProps> = ({
     { title: 'Gender', value: gender },
     { title: 'Glasses', value: glasses ? 'Yes' : 'No' },
     { title: 'Hair', value: hair },
-  ];
+  ]
 
   return (
     <Card shadow={'sm'} padding={'md'} radius={'md'} w={500} withBorder>
@@ -51,5 +51,5 @@ export const UserDetail: React.FC<UserDetailProps> = ({
         </Flex>
       </Flex>
     </Card>
-  );
-};
+  )
+}
