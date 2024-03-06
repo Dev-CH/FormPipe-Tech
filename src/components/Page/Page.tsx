@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { AppShell, Container, Flex } from '@mantine/core';
-import { Menu } from '@/components';
+import { Menu } from '@components';
 
 const Page: React.FC<PropsWithChildren> = ({ children }) => (
   <Container size={'xl'} style={{ border: '1px solid #ccc' }}>

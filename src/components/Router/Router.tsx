@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { RouteConfig } from '@/types';
+import { RouteConfig } from '@types';
 
 interface RouterProps {
   config: RouteConfig[];

@@ -17,8 +17,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"],
-      "@test-utils": ["./test-utils"]
+      "@api": ["src/api/index.ts"],
+      "@assets/*": ["src/assets/*"],
+      "@components": ["src/components/index.ts"],
+      "@context/*": ["src/context/*"],
+      "@pages": ["src/pages/index.ts"],
+      "@test-utils/*": ["test-utils/*"],
+      "@types": ["src/types/index.ts"],
+      "@utils": ["src/utils/index.ts"],
     }
   },
   "include": ["src", "test-utils"]

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Group, Radio, Select, TextInput } from '@mantine/core';
-import { FilterConfig } from '@/types';
+import { FilterConfig } from '@types';
 
 interface FilterProps {
   config: FilterConfig,

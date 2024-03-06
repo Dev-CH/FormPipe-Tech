@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Alert, Flex, LoadingOverlay } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Page, PageFilter } from '@/components';
-import { FilterData, NetworkStatus } from '@/types';
-import { useUserManager } from '@/context/UserManager';
+import { Page, PageFilter, PagePagination } from '@components';
+import { FilterData, NetworkStatus } from '@types';
+import { useUserManager } from '@context/UserManager';
 import { Action, ActionBar, UserListView, UserTableView } from './components';
 import { filterConfig } from './filterConfig';
-import PagePagination from '@/components/PagePagination';
 
 export const UsersPage: React.FC = () => {
   const [view, setView] = useState<Action>(Action.ViewList);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ActionIcon, Flex, Group, Indicator } from '@mantine/core';
 import { IconFilter, IconListDetails, IconTableRow } from '@tabler/icons-react';
-import { useUserManager } from '@/context/UserManager';
+import { useUserManager } from '@context/UserManager';
 
 interface ActionBarProps {
   onAction: (action: Action) => void;

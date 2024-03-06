@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useContext, useRef } from 'react';
-import Api from '@/api';
+import Api from '@api';
 
 interface ApiClientContext {
   client?: Api;

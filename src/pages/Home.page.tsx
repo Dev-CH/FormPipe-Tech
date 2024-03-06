@@ -1,5 +1,5 @@
 import { Image, Title } from '@mantine/core';
-import { Page } from '@/components';
+import { Page } from '@components';
 
 export function HomePage() {
   return (

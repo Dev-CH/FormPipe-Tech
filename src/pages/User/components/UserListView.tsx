@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mantine/core';
-import { UserCard } from '@/pages/User/components/UserCard';
-import { useUserManager } from '@/context/UserManager';
+import { useUserManager } from '@context/UserManager';
+import { UserCard } from './UserCard';
 
 export const UserListView: React.FC = () => {
   const { users } = useUserManager();

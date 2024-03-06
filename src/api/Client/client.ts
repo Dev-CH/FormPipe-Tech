@@ -1,10 +1,5 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders, RawAxiosResponseHeaders } from 'axios';
-
-type ClientRequest<TResponseData> = AxiosRequestConfig<TResponseData>;
-type ClientResponse<TResponseData> = {
-    data: TResponseData,
-    headers: RawAxiosResponseHeaders,
-};
+import axios, { AxiosError, AxiosInstance, AxiosResponse, RawAxiosRequestHeaders } from 'axios';
+import { ClientRequest, ClientResponse } from '../types';
 
 class Client {
     #client: AxiosInstance;

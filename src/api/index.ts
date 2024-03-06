@@ -14,3 +14,4 @@ class Api {
 }
 
 export default Api;
+export * from './types';

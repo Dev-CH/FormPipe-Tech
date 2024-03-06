@@ -1,7 +1,7 @@
 import { Button, Card, Image, Title } from '@mantine/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { User } from '@/api/types';
+import { User } from '@api/types';
 
 interface UserCardProps {
   user: User;

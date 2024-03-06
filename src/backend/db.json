@@ -14,7 +14,7 @@
       ]
     },
     {
-      "name": "Genny",
+      "name": "Bob",
       "avatar": "bob.png",
       "id": "l0m9GZr",
       "gender": "male",
@@ -27,13 +27,13 @@
       ]
     },
     {
-      "name": "Jannet",
+      "name": "Caitlin",
       "avatar": "caitlin.png",
       "id": "OFdykla",
-      "gender": "male",
+      "gender": "female",
       "hair": "red",
       "eyes": "blue",
-      "glasses": true,
+      "glasses": false,
       "roles": [
         "1"
       ]

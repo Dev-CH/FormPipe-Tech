@@ -1,14 +1,14 @@
 import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { FilterData, NetworkStatus } from '@/types';
+import { FilterData, NetworkStatus } from '@types';
 import {
   Direction,
   Sortable,
   UpdateUserRequest,
   UserOrdering,
   UserPaginate,
-} from '@/api/types/User';
-import { useApi } from '@/context/ApiClient';
-import { User } from '@/api/types';
+  User,
+} from '@api';
+import { useApi } from '@context/ApiClient';
 
 interface UserManagerContext {
   users: User[];

@@ -1,5 +1,5 @@
-import { useParams, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Group,
   LoadingOverlay,
@@ -7,9 +7,9 @@ import {
   Flex,
 } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
-import { Page } from '@/components';
+import { Page } from '@components';
+import { useUserManager } from '@context/UserManager';
 import { UserDetail, UserEdit } from './components';
-import { useUserManager } from '@/context/UserManager';
 
 export const UserDetailPage = () => {
   const { id } = useParams();

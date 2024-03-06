@@ -1,5 +1,5 @@
-import { RouteConfig } from '@/types';
-import { HomePage, UsersPage, UserDetailPage } from '@/pages';
+import { RouteConfig } from '@types';
+import { HomePage, UsersPage, UserDetailPage } from '@pages';
 
 export const routeConfig: RouteConfig[] = [
   {

@@ -1,6 +1,5 @@
 import Client from '../Client/client';
-import { ApiResponse } from '@/api/types/ApiResponse';
-import { UpdateUserRequest, User } from '@/api/types';
+import { ApiResponse, UpdateUserRequest, User } from '../types';
 
 interface UserFilters {
     [name: string]: any,

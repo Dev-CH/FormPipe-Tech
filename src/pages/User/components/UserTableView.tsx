@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ActionIcon, Image, Table } from '@mantine/core';
 import { IconSortAscending, IconSortDescending, IconArrowsSort } from '@tabler/icons-react';
-import { useUserManager } from '@/context/UserManager';
-import { Direction, Sortable } from '@/api/types/User';
+import { useUserManager } from '@context/UserManager';
+import { Direction, Sortable } from '@api/types';
 
 type Ordering = {
   [column in Sortable]?: Direction;

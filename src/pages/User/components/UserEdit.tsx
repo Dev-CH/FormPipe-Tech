@@ -1,8 +1,8 @@
 import { Button, Card, Checkbox, Grid, Group, TextInput, Text, Select, LoadingOverlay } from '@mantine/core';
 import { isNotEmpty, useForm } from '@mantine/form';
 import React, { useEffect, useState } from 'react';
-import { UpdateUserRequest, User } from '@/api/types';
-import { useUserManager } from '@/context/UserManager';
+import { UpdateUserRequest, User } from '@api/types';
+import { useUserManager } from '@context/UserManager';
 
 interface UserEditProps {
   user: User,
