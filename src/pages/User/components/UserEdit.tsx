@@ -11,7 +11,7 @@ import {
 } from '@mantine/core'
 import { isNotEmpty, useForm } from '@mantine/form'
 import React, { useEffect, useState } from 'react'
-import { UpdateUserRequest, User } from '@api/types'
+import { UpdateUserRequest, User } from '@api'
 import { useUserManager } from '@context/UserManager'
 
 interface UserEditProps {
